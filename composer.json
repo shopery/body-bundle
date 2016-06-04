@@ -1,5 +1,6 @@
 {
     "name": "shopery/body-bundle",
+    "description": "Process request body and injects it into Symfony2 controllers",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
