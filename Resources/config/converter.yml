@@ -1,0 +1,8 @@
+services:
+
+    shopery.body.param_converter:
+        class: Shopery\Bundle\BodyBundle\Request\ParamConverter\BodyParamConverter
+        public: false
+        arguments: ~
+        tags:
+            - { name: request.param_converter }

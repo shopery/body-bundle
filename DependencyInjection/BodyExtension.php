@@ -26,5 +26,7 @@ class BodyExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
+
+        $loader->load('converter.yml');
     }
 }
