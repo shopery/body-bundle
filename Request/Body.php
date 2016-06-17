@@ -8,6 +8,11 @@
 
 namespace Shopery\Bundle\BodyBundle\Request;
 
+use Traversable;
+use Iterator;
+use DomainException;
+use ArrayIterator;
+
 use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -17,6 +22,13 @@ class Body implements \ArrayAccess, \IteratorAggregate
 
     public function __construct($content)
     {
+        if (!$this->isValidContent($content)) {
+            throw new DomainException(sprintf(
+                'Invalid body content: %s',
+                serialize($content)
+            ));
+        }
+
         $this->content = $content;
     }
 
@@ -55,6 +67,18 @@ class Body implements \ArrayAccess, \IteratorAggregate
 
     public function getIterator()
     {
+        if (is_array($this->content)) {
+            return new ArrayIterator($this->content);
+        }
+
         return $this->content;
+    }
+
+    private function isValidContent($content)
+    {
+        return
+            is_array($content)
+            || $content instanceof Traversable
+            || $content instanceof Iterator;
     }
 }
