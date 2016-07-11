@@ -32,6 +32,15 @@ class Body implements \ArrayAccess, \IteratorAggregate
         $this->content = $content;
     }
 
+    public function get($offset, $default = null)
+    {
+        if ($this->offsetExists($offset)) {
+            return $this->offsetGet($offset);
+        }
+
+        return $default;
+    }
+
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->content);
