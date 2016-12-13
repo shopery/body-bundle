@@ -1,0 +1,8 @@
+services:
+
+    shopery.body.argument_value_resolver:
+        class: Shopery\Bundle\BodyBundle\Request\ArgumentResolver\BodyArgumentResolver
+        public: false
+        arguments: ~
+        tags:
+            - { name: controller.argument_value_resolver }

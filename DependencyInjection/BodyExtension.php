@@ -27,6 +27,20 @@ class BodyExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
 
-        $loader->load('converter.yml');
+        if ($this->supportsArgumentResolver()) {
+            $loader->load('argument_resolver.yml');
+        } else {
+            $loader->load('param_converter.yml');
+        }
+    }
+
+    private function supportsArgumentResolver()
+    {
+        if (!interface_exists('Symfony\\Component\\HttpKernel\\Controller\\ArgumentValueResolverInterface')) {
+            return false;
+        }
+
+        // Checks support of yield keyword (PHP < 5.5)
+        return defined('T_YIELD');
     }
 }
