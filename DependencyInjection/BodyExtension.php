@@ -28,5 +28,6 @@ class BodyExtension extends Extension
         );
 
         $loader->load('converter.yml');
+        $loader->load('decoder.yml');
     }
 }
