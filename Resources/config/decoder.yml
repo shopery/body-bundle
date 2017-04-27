@@ -1,0 +1,6 @@
+services:
+
+    shopery.body.json_decoder:
+        class: Shopery\Bundle\BodyBundle\Decoder\JsonDecoder
+        tags:
+            - { name: shopery.body_decoder, type: json }
